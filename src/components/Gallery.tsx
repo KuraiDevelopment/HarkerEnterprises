@@ -107,11 +107,11 @@ export default function Gallery() {
                 onError={() => handleImageError(currentImage)}
               />
             ) : (
-              <div className="absolute inset-0 bg-gradient-to-br from-green-600 to-green-800 flex items-center justify-center">
+              <div className="absolute inset-0 bg-gradient-to-br from-gray-600 to-gray-800 flex items-center justify-center">
                 <div className="text-center text-white">
                   <div className="text-6xl mb-4">📸</div>
                   <h3 className="text-2xl font-bold mb-2">{projects[currentImage].title}</h3>
-                  <p className="text-green-100 max-w-md mx-auto">
+                  <p className="text-gray-100 max-w-md mx-auto">
                     {projects[currentImage].description}
                   </p>
                 </div>
@@ -163,7 +163,7 @@ export default function Gallery() {
               key={index}
               onClick={() => setCurrentImage(index)}
               className={`w-3 h-3 rounded-full transition-all ${
-                index === currentImage ? 'bg-green-600' : 'bg-gray-300 hover:bg-gray-400'
+                index === currentImage ? 'bg-blue-600' : 'bg-gray-300 hover:bg-gray-400'
               }`}
             />
           ))}
@@ -177,7 +177,7 @@ export default function Gallery() {
               onClick={() => setCurrentImage(index)}
               className={`relative h-24 rounded-lg overflow-hidden border-2 transition-all ${
                 index === currentImage 
-                  ? 'border-green-600 shadow-lg' 
+                  ? 'border-blue-600 shadow-lg' 
                   : 'border-gray-200 dark:border-gray-600 hover:border-gray-400 dark:hover:border-gray-400'
               }`}
             >
@@ -192,7 +192,7 @@ export default function Gallery() {
                   onError={() => handleImageError(index)}
                 />
               ) : (
-                <div className="absolute inset-0 bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center">
+                <div className="absolute inset-0 bg-gradient-to-br from-gray-400 to-gray-600 flex items-center justify-center">
                   <span className="text-white text-2xl">📸</span>
                 </div>
               )}
@@ -215,7 +215,7 @@ export default function Gallery() {
               href="https://www.facebook.com/PrecisionDriveway/?ref=page_internal" 
               target="_blank"
               rel="noopener noreferrer"
-              className="border-2 border-green-600 dark:border-green-400 text-green-600 dark:text-green-400 hover:bg-green-600 dark:hover:bg-green-400 hover:text-white dark:hover:text-gray-900 px-8 py-3 rounded-lg text-lg font-semibold transition-colors"
+              className="border-2 border-blue-600 dark:border-blue-400 text-blue-600 dark:text-blue-400 hover:bg-blue-600 dark:hover:bg-blue-400 hover:text-white dark:hover:text-gray-900 px-8 py-3 rounded-lg text-lg font-semibold transition-colors"
             >
               View More on Facebook
             </a>

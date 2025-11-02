@@ -74,7 +74,7 @@ export default function BookingSection() {
 
   if (isSubmitted) {
     return (
-      <section id="booking" className="py-20 bg-green-50 dark:bg-green-950">
+      <section id="booking" className="py-20 bg-gray-50 dark:bg-gray-950">
         <div className="max-w-4xl mx-auto px-4 text-center">
           <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-12">
             <div className="text-6xl mb-4">✅</div>
@@ -92,7 +92,7 @@ export default function BookingSection() {
   }
 
   return (
-    <section id="booking" className="py-20 bg-green-50 dark:bg-green-950">
+    <section id="booking" className="py-20 bg-gray-50 dark:bg-gray-950">
       <div className="max-w-4xl mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
@@ -225,14 +225,14 @@ export default function BookingSection() {
 
             {/* Price Estimate Display */}
             {estimatedPrice !== null && formData.service === 'gravel-driveway' && (
-              <div className="mb-6 p-4 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg">
-                <h4 className="text-lg font-semibold text-green-800 dark:text-green-200 mb-2">
+              <div className="mb-6 p-4 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg">
+                <h4 className="text-lg font-semibold text-blue-800 dark:text-blue-200 mb-2">
                   Estimated Price
                 </h4>
-                <p className="text-2xl font-bold text-green-700 dark:text-green-300">
+                <p className="text-2xl font-bold text-blue-700 dark:text-blue-300">
                   ${estimatedPrice.toFixed(2)}
                 </p>
-                <p className="text-sm text-green-600 dark:text-green-400 mt-2">
+                <p className="text-sm text-blue-600 dark:text-blue-400 mt-2">
                   Pricing: $280 for first 200 feet, then $0.80 per additional foot
                 </p>
                 <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
