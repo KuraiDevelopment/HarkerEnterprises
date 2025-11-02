@@ -3,7 +3,7 @@ export default function Services() {
     {
       title: "Gravel Driveway Restoration",
       description: "An alternative to buying new gravel. We expertly grade and restore your stone drive without adding additional gravel. A great way to save money.",
-      icon: "🛣️",
+      icon: "🏗️",
       features: ["Expert grading", "No additional gravel needed", "Cost-effective solution", "Professional restoration"]
     },
     {
@@ -15,7 +15,7 @@ export default function Services() {
     {
       title: "Brush Hogging and Rototilling",
       description: "We can brush hog with small trees up to one inch in diameter. Rototilling estimates upon request and season.",
-      icon: "�",
+      icon: "🌾",
       features: ["Small tree removal (up to 1\")", "Seasonal rototilling", "Land clearing", "Custom estimates available"]
     }
   ]
@@ -42,7 +42,7 @@ export default function Services() {
               <ul className="space-y-2">
                 {service.features.map((feature, featureIndex) => (
                   <li key={featureIndex} className="flex items-center text-gray-700 dark:text-gray-300">
-                    <svg className="w-5 h-5 text-green-600 dark:text-green-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-5 h-5 text-blue-600 dark:text-blue-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
                     {feature}
@@ -56,7 +56,7 @@ export default function Services() {
         <div className="text-center mt-16">
           <a 
             href="#booking" 
-            className="bg-green-700 hover:bg-green-800 dark:bg-green-600 dark:hover:bg-green-700 text-white px-8 py-3 rounded-lg text-lg font-semibold transition-colors"
+            className="bg-blue-700 hover:bg-blue-800 dark:bg-blue-600 dark:hover:bg-blue-700 text-white px-8 py-3 rounded-lg text-lg font-semibold transition-colors"
           >
             Request Service Quote
           </a>

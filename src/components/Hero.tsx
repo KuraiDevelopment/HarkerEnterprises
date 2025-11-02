@@ -7,7 +7,7 @@ export default function Hero() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   return (
-    <section className="relative min-h-screen bg-gradient-to-br from-green-800 via-green-700 to-green-900 dark:from-green-900 dark:via-green-800 dark:to-black text-white">
+    <section className="relative min-h-screen bg-gradient-to-br from-gray-800 via-gray-700 to-gray-900 dark:from-gray-900 dark:via-gray-800 dark:to-black text-white">
       {/* Navigation */}
       <nav className="relative z-10 px-4 py-6">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
@@ -18,10 +18,10 @@ export default function Hero() {
           <div className="flex items-center space-x-4">
             {/* Desktop Navigation */}
             <div className="hidden md:flex space-x-8">
-              <a href="#services" className="hover:text-green-200 transition-colors">Services</a>
-              <a href="#gallery" className="hover:text-green-200 transition-colors">Gallery</a>
-              <a href="#booking" className="hover:text-green-200 transition-colors">Book Now</a>
-              <a href="#contact" className="hover:text-green-200 transition-colors">Contact</a>
+              <a href="#services" className="hover:text-gray-200 transition-colors">Services</a>
+              <a href="#gallery" className="hover:text-gray-200 transition-colors">Gallery</a>
+              <a href="#booking" className="hover:text-gray-200 transition-colors">Book Now</a>
+              <a href="#contact" className="hover:text-gray-200 transition-colors">Contact</a>
             </div>
             
             {/* Theme Toggle */}
@@ -41,11 +41,11 @@ export default function Hero() {
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="md:hidden mt-4 bg-green-900/90 dark:bg-green-950/90 backdrop-blur-sm rounded-lg p-4">
-            <a href="#services" className="block py-2 hover:text-green-200">Services</a>
-            <a href="#gallery" className="block py-2 hover:text-green-200">Gallery</a>
-            <a href="#booking" className="block py-2 hover:text-green-200">Book Now</a>
-            <a href="#contact" className="block py-2 hover:text-green-200">Contact</a>
+          <div className="md:hidden mt-4 bg-gray-900/90 dark:bg-gray-950/90 backdrop-blur-sm rounded-lg p-4">
+            <a href="#services" className="block py-2 hover:text-gray-200">Services</a>
+            <a href="#gallery" className="block py-2 hover:text-gray-200">Gallery</a>
+            <a href="#booking" className="block py-2 hover:text-gray-200">Book Now</a>
+            <a href="#contact" className="block py-2 hover:text-gray-200">Contact</a>
           </div>
         )}
       </nav>
@@ -56,10 +56,10 @@ export default function Hero() {
           <h1 className="text-5xl md:text-7xl font-bold mb-6">
             Harker Enterprises
           </h1>
-          <p className="text-xl md:text-2xl mb-4 text-green-100">
+          <p className="text-xl md:text-2xl mb-4 text-gray-100">
             Professional Gravel Driveway Restoration
           </p>
-          <p className="text-lg md:text-xl mb-8 text-green-200">
+          <p className="text-lg md:text-xl mb-8 text-gray-200">
             Small Excavating • Brush Hogging • Rototilling
           </p>
           
@@ -72,7 +72,7 @@ export default function Hero() {
             </a>
             <a 
               href="#gallery" 
-              className="border-2 border-white text-white hover:bg-white hover:text-green-800 px-8 py-3 rounded-lg text-lg font-semibold transition-colors"
+              className="border-2 border-white text-white hover:bg-white hover:text-gray-800 px-8 py-3 rounded-lg text-lg font-semibold transition-colors"
             >
               View Our Work
             </a>
