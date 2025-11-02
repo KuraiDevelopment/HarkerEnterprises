@@ -3,13 +3,13 @@ export default function Services() {
     {
       title: "Gravel Driveway Restoration",
       description: "An alternative to buying new gravel. We expertly grade and restore your stone drive without adding additional gravel. A great way to save money.",
-      icon: "🏗️",
+      icon: "🚜",
       features: ["Expert grading", "No additional gravel needed", "Cost-effective solution", "Professional restoration"]
     },
     {
       title: "Small Excavating Work",
       description: "Ditch cleanout, small culvert replacement, small ponds, and other small excavating jobs by request.",
-      icon: "🚜",
+      icon: "🏗️",
       features: ["Ditch cleanout", "Culvert replacement", "Small pond construction", "Custom excavating jobs"]
     },
     {
