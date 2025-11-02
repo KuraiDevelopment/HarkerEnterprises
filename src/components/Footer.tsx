@@ -84,7 +84,7 @@ export default function Footer() {
               <div className="text-gray-300 space-y-1">
                 <div>Monday - Thursday: 3:00 PM - 8:00 PM</div>
                 <div>Friday: All Day</div>
-                <div>Saturday: 8:00 AM - 8:00 PM</div>
+                <div>Saturday: All Day</div>
                 <div>Sunday: All Day</div>
               </div>
             </div>
