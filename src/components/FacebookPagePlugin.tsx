@@ -54,7 +54,7 @@ export default function FacebookPagePlugin({
         data-show-facepile={showFacepile.toString()}
       >
         <blockquote cite={href} className="fb-xfbml-parse-ignore">
-          <a href={href}>Precision Driveway</a>
+          <a href={href}>Harker Enterprises LLC</a>
         </blockquote>
       </div>
     </div>
