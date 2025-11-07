@@ -19,9 +19,6 @@ const nextConfig = {
     minimumCacheTTL: 60,
   },
 
-  // Production-specific optimizations
-  swcMinify: true,
-
   // Experimental features (optional)
   experimental: {
     optimizeCss: true,
