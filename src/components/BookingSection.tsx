@@ -1,6 +1,8 @@
 'use client'
 
 import { useState } from 'react'
+import { BUSINESS_INFO, SERVICES } from '@/constants/business'
+import { trackFormSubmission, trackServiceInquiry } from '@/components/Analytics'
 
 export default function BookingSection() {
   const [formData, setFormData] = useState({
@@ -16,39 +18,78 @@ export default function BookingSection() {
   })
 
   const [isSubmitted, setIsSubmitted] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitError, setSubmitError] = useState<string | null>(null)
   const [estimatedPrice, setEstimatedPrice] = useState<number | null>(null)
 
   // Calculate gravel driveway restoration pricing
   const calculateGravelPrice = (length: number): number => {
-    if (length <= 200) {
-      return 280
+    const basePrice = SERVICES[0].pricing.basePrice || 280
+    const baseDistance = SERVICES[0].pricing.baseDistance || 200
+    const additionalPrice = SERVICES[0].pricing.additionalPricePerFoot || 0.80
+    
+    if (length <= baseDistance) {
+      return basePrice
     } else {
-      const extraFeet = length - 200
-      return 280 + (extraFeet * 0.80)
+      const extraFeet = length - baseDistance
+      return basePrice + (extraFeet * additionalPrice)
     }
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // In a real application, this would send data to your backend
-    console.log('Form submitted:', formData)
-    setIsSubmitted(true)
+    setIsSubmitting(true)
+    setSubmitError(null)
     
-    // Reset form after 3 seconds
-    setTimeout(() => {
-      setIsSubmitted(false)
-      setFormData({
-        name: '',
-        email: '',
-        phone: '',
-        service: '',
-        propertySize: '',
-        drivewayLength: '',
-        description: '',
-        preferredDate: '',
-        urgency: 'normal'
+    try {
+      // Track the service inquiry
+      trackServiceInquiry(formData.service)
+      
+      // Submit to API
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ...formData,
+          estimatedPrice,
+        }),
       })
-    }, 3000)
+
+      const data = await response.json()
+
+      if (data.success) {
+        trackFormSubmission('quote_request', true)
+        setIsSubmitted(true)
+        
+        // Reset form after 5 seconds
+        setTimeout(() => {
+          setIsSubmitted(false)
+          setFormData({
+            name: '',
+            email: '',
+            phone: '',
+            service: '',
+            propertySize: '',
+            drivewayLength: '',
+            description: '',
+            preferredDate: '',
+            urgency: 'normal'
+          })
+          setEstimatedPrice(null)
+        }, 5000)
+      } else {
+        trackFormSubmission('quote_request', false)
+        setSubmitError(data.error || 'Failed to submit. Please try again or call us directly.')
+      }
+    } catch (error) {
+      console.error('Form submission error:', error)
+      trackFormSubmission('quote_request', false)
+      setSubmitError('Network error. Please check your connection and try again.')
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
@@ -83,7 +124,7 @@ export default function BookingSection() {
               We've received your request and will contact you within 24 hours to discuss your project and schedule a free consultation.
             </p>
             <p className="text-gray-500 dark:text-gray-400">
-              For urgent requests, please call us directly at (330) 301-2769
+              For urgent requests, please call us directly at <a href={`tel:${BUSINESS_INFO.phoneRaw}`} className="text-orange-600 dark:text-orange-400 hover:underline font-semibold">{BUSINESS_INFO.phone}</a>
             </p>
           </div>
         </div>
@@ -105,6 +146,12 @@ export default function BookingSection() {
         </div>
 
         <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8">
+          {submitError && (
+            <div className="mb-6 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
+              <p className="text-red-800 dark:text-red-200 text-sm">{submitError}</p>
+            </div>
+          )}
+          
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* Contact Information */}
             <div className="grid md:grid-cols-2 gap-6">
@@ -297,9 +344,20 @@ export default function BookingSection() {
             <div className="text-center pt-6">
               <button
                 type="submit"
-                className="bg-orange-600 hover:bg-orange-700 dark:bg-orange-500 dark:hover:bg-orange-600 text-white px-12 py-4 rounded-lg text-lg font-semibold transition-colors shadow-lg"
+                disabled={isSubmitting}
+                className="bg-orange-600 hover:bg-orange-700 dark:bg-orange-500 dark:hover:bg-orange-600 text-white px-12 py-4 rounded-lg text-lg font-semibold transition-colors shadow-lg disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center mx-auto gap-2"
               >
-                Get My Free Quote
+                {isSubmitting ? (
+                  <>
+                    <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                    </svg>
+                    <span>Sending...</span>
+                  </>
+                ) : (
+                  'Get My Free Quote'
+                )}
               </button>
               <p className="text-sm text-gray-500 dark:text-gray-400 mt-3">
                 We'll respond within 24 hours with your customized quote
@@ -313,19 +371,19 @@ export default function BookingSection() {
           <p className="text-gray-600 dark:text-gray-300 mb-4">Prefer to talk directly?</p>
           <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
             <a 
-              href="tel:3303012769" 
+              href={`tel:${BUSINESS_INFO.phoneRaw}`}
               className="flex items-center text-green-700 dark:text-green-400 hover:text-green-800 dark:hover:text-green-300 font-semibold"
             >
               <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
               </svg>
-              (330) 301-2769
+              {BUSINESS_INFO.phone}
             </a>
             
             <span className="text-gray-400 dark:text-gray-500">•</span>
             
             <a 
-              href="https://www.facebook.com/PrecisionDriveway/?ref=page_internal" 
+              href={BUSINESS_INFO.social.facebook}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-semibold"
@@ -333,7 +391,7 @@ export default function BookingSection() {
               <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
               </svg>
-              Harker Enterprises LLC on Facebook
+              {BUSINESS_INFO.name} on Facebook
             </a>
           </div>
         </div>
