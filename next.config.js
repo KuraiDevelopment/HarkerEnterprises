@@ -19,11 +19,6 @@ const nextConfig = {
     minimumCacheTTL: 60,
   },
 
-  // Experimental features (optional)
-  experimental: {
-    optimizeCss: true,
-  },
-
   // Headers for security and performance
   async headers() {
     return [
