@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     template: `%s | ${BUSINESS_INFO.name}`
   },
   description: `Professional gravel driveway restoration, small excavating services, brush hogging, and rototilling in ${BUSINESS_INFO.address.city}, ${BUSINESS_INFO.address.state} and surrounding areas. Call ${BUSINESS_INFO.phone} for free estimates.`,
-  keywords: SEO_KEYWORDS,
+  keywords: [...SEO_KEYWORDS],
   authors: [{ name: BUSINESS_INFO.name }],
   creator: BUSINESS_INFO.name,
   publisher: BUSINESS_INFO.name,
