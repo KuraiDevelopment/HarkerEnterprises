@@ -25,25 +25,25 @@ export default function NotFound() {
           <div className="grid md:grid-cols-2 gap-4">
             <Link 
               href="/"
-              className="bg-orange-600 hover:bg-orange-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors"
+              className="block bg-orange-600 hover:bg-orange-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors"
             >
               🏠 Back to Home
             </Link>
             <Link 
               href="/#services"
-              className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors"
+              className="block bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors"
             >
               🚜 View Services
             </Link>
             <Link 
               href="/#booking"
-              className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors"
+              className="block bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors"
             >
               📋 Get a Quote
             </Link>
             <a 
               href={`tel:${BUSINESS_INFO.phoneRaw}`}
-              className="bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors"
+              className="block bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors"
             >
               📞 Call Us Now
             </a>
