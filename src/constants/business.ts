@@ -106,6 +106,4 @@ export const SEO_KEYWORDS = [
   "drainage solutions"
 ] as const
 
-export const SITE_URL = typeof window !== 'undefined' 
-  ? window.location.origin 
-  : "https://harker-enterprises.com"
+export const SITE_URL = "https://harker-enterprises.com"

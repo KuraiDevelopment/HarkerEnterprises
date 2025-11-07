@@ -1,5 +1,3 @@
-'use client'
-
 import { BUSINESS_INFO, SERVICES, SITE_URL } from '@/constants/business'
 
 export default function StructuredData() {
